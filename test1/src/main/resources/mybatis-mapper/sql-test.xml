@@ -6,25 +6,23 @@
 	<select id="testList" parameterType="hashmap" resultType="com.example.test1.model.Test">
 		SELECT *
 		FROM TEST_PRODUCT
-		WHEWR PRODUCT_NO = #{productNo}
+		WHERE PRODUCT_NO = #{productNo}
 	</select>
 	
 	<delete id="testRemove" parameterType="hashmap">
-		DELETE
+		DELETE 
 		FROM TEST_PRODUCT
-		WHEWE PRODUCT_NO = #{productNo}
+		WHERE PRODUCT_NO = #{productNo}
 	</delete>
 	
 	<update id="testUpdate" parameterType="hashmap">
 		UPDATE TEST_PRODUCT
 		SET PRODUCT_PRICE = #{productPrice}
-		WHEWE PRODUCT_NO = #{productNo}
+		WHERE PRODUCT_NO = #{productNo}
 	</update>
 	
 	<insert id="testInsert" parameterType="hashmap">
-		INSERT ONTO TEST_PRODUCT
+		INSERT INTO TEST_PRODUCT
 		VALUES(PRODUCT_SEQ.NEXTVAL, #{productName}, #{productPrice})
 	</insert>
-	
-	
 </mapper>

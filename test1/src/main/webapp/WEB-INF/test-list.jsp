@@ -8,28 +8,23 @@
 	<title>테스트 샘플 파일</title>
 </head>
 <style>
+	#app * {
+		margin: 5px;
+	}
 </style>
 <body>
 	<div id="app">
-		<div>
-			<input type="text" placeholder="1~15 입력(pk값)" v-model="productNo">
-			<button type="button" @click="fnGetList">검색</button>
-		</div>
+		<div><input type="text" placeholder="1~15 입력(pk값)" v-model="productNo"><button type="button" @click="fnGetList">검색</button></div>
 		<template v-if="productView">
 			<div>제품번호 : {{productInfo.productNo}}</div>
-			<div>제품명: {{productInfo.productName}}</div>
-			<div>제품가격:
-				<template v-if="!priceView">{{productInfo.productPrice}}</template>
-				<template v-else>
-					<input type="text" v-model="price">
-					<button type="button" @click="fnUpdate">저장</button>
-				</template>
-			</div>
+			<div>제품명 : {{productInfo.productName}}</div>
 			<div>
-				<button type="button" @click="priceView = !priceView">수정</button>
-				<button type="button" @click="fnRemove">삭제</button>
+				제품가격 : 
+				<template v-if="!priceView">{{productInfo.productPrice}}</template>			
+				<template v-else><input type="text" v-model="price"><button type="button" @click="fnUpdate">저장</button></template>			
 			</div>
-		</tempate>
+			<div><button type="button" @click="priceView = !priceView">수정</button><button type="button" @click="fnRemove">삭제</button></div>
+		</template>
 	</div>
 </body>
 </html>
@@ -50,18 +45,17 @@
 				var nparmap = {productNo : self.productNo};
 				$.ajax({
 					url:"test.dox",
-					dataType:"json",
+					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
 						console.log(data);
-						if(data.result == "success"){
+						if(data.result== "success"){
 							self.productView = true;
 							self.productInfo = data.product;
 							self.price = self.productInfo.productPrice;
-							
 						} else {
-							alert("조회실패");
+							alert("조회 실패");
 							self.productView = false;
 						}
 					}
@@ -69,48 +63,45 @@
             },
 			fnRemove(){
 				var self = this;
-				var nparmap = {
-					productNo : self.productNo
-				};
+				var nparmap = {productNo : self.productNo};
 				$.ajax({
 					url:"testRemove.dox",
-					dataType:"json",
+					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
 						console.log(data);
-						if(data.result == "success"){
+						if(data.result == 'success'){
 							self.productView = false;
 						} else {
 							self.productView = true;
 						}
-						alert(data.messge);
+						alert(data.message);
+					
 					}
 				});
 			},
 			fnUpdate(){
 				var self = this;
-				var nparmap = {
-					productNo : self.productNo,
-					productPrice : self.productPrice
-				};
+				var nparmap = {productNo : self.productNo, productPrice : self.price};
 				$.ajax({
 					url:"testUpdate.dox",
-					dataType:"json",
+					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
 						console.log(data);
-						if(data.result == "success"){
-							self.productView = false;
+						if(data.result == 'success'){
+							self.priceView = false;
 							self.fnGetList();
 						} else {
-							self.productView = true;
+							self.priceView = true;
 						}
-						alert(data.messge);
+						alert(data.message);
+					
 					}
 				});
-			},
+			}
         },
         mounted() {
         }

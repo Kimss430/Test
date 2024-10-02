@@ -27,7 +27,7 @@ public class TestServiceImpl implements TestService{
 				resultMap.put("result", "null");
 			} else {
 				resultMap.put("product", product);
-				resultMap.put("result", "sucess");
+				resultMap.put("result", "success");
 			}
 		
 		} catch (Exception e) {
@@ -38,26 +38,6 @@ public class TestServiceImpl implements TestService{
 		return resultMap;
 	}
 
-	@Override
-	public HashMap<String, Object> testUpdate(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
-	HashMap<String, Object> resultMap = new HashMap<String, Object>();
-			
-			try {
-				testMapper.testUpdate(map);
-				
-				resultMap.put("result", "sucess");
-				resultMap.put("message", "수정 됨");
-				
-			
-			} catch (Exception e) {
-				// TODO: handle exception
-				resultMap.put("result", "fail");
-				resultMap.put("message", "수정 실패");
-			}
-			
-			return resultMap;
-	}
 
 	@Override
 	public HashMap<String, Object> testRemove(HashMap<String, Object> map) {
@@ -67,7 +47,7 @@ public class TestServiceImpl implements TestService{
 		try {
 			testMapper.testRemove(map);
 			
-			resultMap.put("result", "sucess");
+			resultMap.put("result", "success");
 			resultMap.put("message", "삭제 됨");
 			
 		
@@ -81,6 +61,27 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
+	public HashMap<String, Object> testUpdate(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		try {
+			testMapper.testUpdate(map);
+			
+			resultMap.put("result", "success");
+			resultMap.put("message", "수정 됨");
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", "수정 실패");
+		}
+		
+		return resultMap;
+	}
+	
+	@Override
 	public HashMap<String, Object> testInsert(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -88,7 +89,7 @@ public class TestServiceImpl implements TestService{
 		try {
 			testMapper.testInsert(map);
 			
-			resultMap.put("result", "sucess");
+			resultMap.put("result", "success");
 			resultMap.put("message", "저장 됨");
 			
 		
